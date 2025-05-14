@@ -1,7 +1,8 @@
 body {
   margin-left: 10%;
   margin-right: 10%;
-  background-image: url("./assets/background.png");
+  /* background-image: url("./assets/background.png"); */
+  background-image: url("/ToDo_React_Application/background.png");
   background-attachment: fixed;
   height: 100%;
   background-position: center;
