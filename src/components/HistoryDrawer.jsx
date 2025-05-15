@@ -27,11 +27,13 @@ function HistoryDrawer({
             icon={faXmark}
             className="close-btn"
             onClick={() => setShowHistoryDrawer(false)}
+            title="Close"
           />
           <FontAwesomeIcon
             icon={faTrash}
             className="clear-btn"
             onClick={() => handleClearHistory()}
+            title="Clear all"
           />
         </div>
 
