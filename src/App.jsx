@@ -8,6 +8,9 @@ import { useEffect, useState } from "react";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faClockRotateLeft } from "@fortawesome/free-solid-svg-icons";
+import { faCloudMoon } from "@fortawesome/free-solid-svg-icons";
+import { faCloudSun } from "@fortawesome/free-solid-svg-icons";
+
 import HistoryDrawer from "./components/HistoryDrawer";
 
 function App() {
@@ -33,6 +36,8 @@ function App() {
   const [recentTimestampsList, setRecentTimestampsList] = useState([]);
 
   const [showHistoryDrawer, setShowHistoryDrawer] = useState(false);
+
+  const [darkMode, setDarkMode] = useState(false);
 
   // Load the data from the local storage
   useEffect(() => {
@@ -60,6 +65,13 @@ function App() {
     if (existingCompletedTimestampList) {
       setCompletedCreatedAtList(existingCompletedTimestampList);
     }
+
+    const isDarkMode = localStorage.getItem("darkMode");
+    if (isDarkMode === "true") {
+      setDarkMode(true);
+    } else {
+      setDarkMode(false);
+    }
   }, []);
 
   // Disable/Enable scrolling when the history drawer is open
@@ -70,6 +82,12 @@ function App() {
       document.body.style.overflow = "auto"; // Enable scrolling
     }
   }, [showHistoryDrawer]);
+
+  // Toggle dark mode
+  useEffect(() => {
+    document.body.classList.toggle("dark-mode", darkMode);
+    localStorage.setItem("darkMode", darkMode);
+  }, [darkMode]);
 
   function handleAddTask() {
     if (task.trim() === "") {
@@ -352,7 +370,23 @@ function App() {
           icon={faClockRotateLeft}
           className="history-icon"
           onClick={handleViewHistory}
+          title="History"
         />
+        {!darkMode ? (
+          <FontAwesomeIcon
+            icon={faCloudMoon}
+            className="dark-theme-icon"
+            onClick={() => setDarkMode(!darkMode)}
+            title="Dark mode"
+          />
+        ) : (
+          <FontAwesomeIcon
+            icon={faCloudSun}
+            className="light-theme-icon"
+            onClick={() => setDarkMode(!darkMode)}
+            title="Light mode"
+          />
+        )}
       </body>
       <p id="title">To-Do List Application</p>
       <HistoryDrawer
