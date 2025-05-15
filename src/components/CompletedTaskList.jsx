@@ -33,7 +33,7 @@ function CompletedTaskList({
         {completedTasksList.length === 0 ? (
           <p id="empty-list">No records 📑</p>
         ) : (
-          <div className="card-container">
+          <div className="completed-card-container">
             {completedTasksList.map((_, itemIndex) => (
               <div className="card-wrapper" key={itemIndex}>
                 <div className="completed-card">
