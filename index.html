@@ -5,6 +5,13 @@
     <link rel="icon" type="image/svg+xml" href="/vite.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>ToDo Application</title>
+    <script>
+      // Check localStorage for dark mode preference and apply it immediately
+      const isDarkMode = localStorage.getItem("darkMode") === "true";
+      if (isDarkMode) {
+        document.documentElement.classList.add("dark-mode");
+      }
+    </script>
   </head>
   <body>
     <div id="root"></div>
