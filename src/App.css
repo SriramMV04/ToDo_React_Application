@@ -9,25 +9,15 @@
   --btn-color: black;
   --footer-bgcolor: white;
   --btn-hover-color: #71797e;
-}
-
-body {
-  margin-left: 10%;
-  margin-right: 10%;
   background-image: url("/ToDo_React_Application/background.png");
   transition: background-image 0.5s ease-in-out;
   background-attachment: fixed;
-  height: 100%;
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
-  font-family: Courier;
-  color: black;
 }
 
-body.dark-mode {
-  background-image: url("/ToDo_React_Application/dark-background.png");
-  color: white;
+:root.dark-mode {
   --input-text-color: white;
   --main-card-bgcolor: #36454f;
   --main-card-border-color: #1b1212;
@@ -38,6 +28,16 @@ body.dark-mode {
   --btn-color: #f9f9f9;
   --footer-bgcolor: #353935;
   --btn-hover-color: #b2beb5;
+  background-image: url("/ToDo_React_Application/dark-background.png");
+  color: white;
+}
+
+body {
+  margin-left: 10%;
+  margin-right: 10%;
+  font-family: Courier;
+  color: inherit;
+  background-color: transparent;
 }
 
 .history-icon {
@@ -52,7 +52,7 @@ body.dark-mode {
 }
 
 .history-icon:hover {
-  color: var(--btn-hover-color);
+  color: #04aa6d;
 }
 
 .dark-theme-icon {
@@ -79,25 +79,65 @@ body.dark-mode {
 
 .light-theme-icon:hover,
 .dark-theme-icon:hover {
-  color: var(--btn-hover-color);
+  color: #04aa6d;
 }
 
 #title {
   text-align: center;
   margin-bottom: 0.5em;
-  font-weight: bolder;
+  margin-left: 12%;
+  margin-right: 12%;
+  font-weight: 800;
   font-size: 3em;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  color: #2c3e50;
+  letter-spacing: 1.5px;
+  text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.1);
+  position: relative;
+  animation: fadeInUp 0.6s ease-in-out;
+  background: linear-gradient(to right, #04aa6d, #2ecc71);
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+#title::after {
+  content: "";
+  display: block;
+  margin: 0.35em auto 0;
+  width: 320px;
+  height: 4px;
+  background: linear-gradient(to right, #04aa6d, #2ecc71);
+  border-radius: 2px;
+  transition: width 0.4s ease-in-out;
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(15px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+#title:hover::after {
+  width: 150px;
 }
 
 .task-conatainer {
   display: flex;
   flex-direction: column;
   align-items: center;
+  margin-top: 50px;
 }
 
 .task-conatainer p {
   font-weight: bolder;
   font-size: 2em;
+  color: #04aa6d;
 }
 
 .input-wrapper {
@@ -123,6 +163,11 @@ body.dark-mode {
   position: relative;
 }
 
+.input-wrapper input:hover {
+  box-shadow: 0 0 10px rgba(102, 255, 0, 0.6), 0 0 20px rgba(102, 255, 0, 0.3);
+  transition: box-shadow 0.3s ease-in-out;
+}
+
 .input-wrapper .input-icon {
   position: absolute;
   top: 50%;
@@ -134,7 +179,7 @@ body.dark-mode {
 }
 
 .input-icon:hover {
-  color: var(--btn-hover-color);
+  color: #04aa6d;
 }
 
 #list-title {
@@ -143,6 +188,7 @@ body.dark-mode {
   font-weight: bolder;
   font-size: 2em;
   margin-bottom: 0;
+  color: #04aa6d;
 }
 
 .clear-container {
@@ -288,6 +334,7 @@ li {
   font-weight: bolder;
   font-size: 2em;
   margin-bottom: 0;
+  color: #04aa6d;
 }
 
 .task-list-container {
@@ -299,7 +346,7 @@ li {
   flex-direction: column;
   flex-wrap: wrap;
   gap: 15px;
-  padding-bottom: 30px;
+  padding-bottom: 35px;
 }
 
 .completed-card {
@@ -309,6 +356,12 @@ li {
   padding: 15px;
   width: 100%;
   box-sizing: border-box;
+}
+
+#completed-empty-list {
+  text-align: center;
+  font-size: 1.5em;
+  padding-bottom: 30px;
 }
 
 .completed-action-buttons {
@@ -364,6 +417,8 @@ li {
 .success-popup {
   position: fixed;
   top: 10px;
+  left: 50%;
+  transform: translateX(-50%);
   background-color: greenyellow;
   color: black;
   padding: 5px 10px;
@@ -377,6 +432,8 @@ li {
 .error-popup {
   position: fixed;
   top: 10px;
+  left: 50%;
+  transform: translateX(-50%);
   background-color: red;
   color: black;
   padding: 5px 10px;
@@ -390,6 +447,8 @@ li {
 .prompt-popup {
   position: fixed;
   top: 10px;
+  left: 50%;
+  transform: translateX(-50%);
   background-color: yellow;
   color: black;
   padding: 5px 10px;
@@ -502,7 +561,7 @@ li {
 
 .drawer-header .close-btn:hover,
 .drawer-header .clear-btn:hover {
-  color: var(--btn-hover-color);
+  color: #04aa6d;
 }
 
 .drawer-backdrop {
