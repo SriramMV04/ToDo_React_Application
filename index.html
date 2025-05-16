@@ -5,8 +5,15 @@
     <link rel="icon" type="image/svg+xml" href="/ToDo_React_Application/vite.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>ToDo Application</title>
-    <script type="module" crossorigin src="/ToDo_React_Application/assets/index-DRraHjHg.js"></script>
-    <link rel="stylesheet" crossorigin href="/ToDo_React_Application/assets/index-DMUgE05w.css">
+    <script>
+      // Check localStorage for dark mode preference and apply it immediately
+      const isDarkMode = localStorage.getItem("darkMode") === "true";
+      if (isDarkMode) {
+        document.documentElement.classList.add("dark-mode");
+      }
+    </script>
+    <script type="module" crossorigin src="/ToDo_React_Application/assets/index-DlcDe_1B.js"></script>
+    <link rel="stylesheet" crossorigin href="/ToDo_React_Application/assets/index-C2VPZ44O.css">
   </head>
   <body>
     <div id="root"></div>
