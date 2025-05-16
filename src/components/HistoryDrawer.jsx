@@ -11,6 +11,9 @@ function HistoryDrawer({
   recentTimestampsList,
   handleRestoreTaskFromHistory,
   handleTaskDeleteFromHistory,
+  successRestoreMessage,
+  successDeleteMessage,
+  errorMessage,
 }) {
   return (
     <>
@@ -78,6 +81,17 @@ function HistoryDrawer({
                 </div>
               ))}
             </div>
+          )}
+          {successRestoreMessage && (
+            <div className="success-restore-popup">Task has been restored</div>
+          )}
+          {successDeleteMessage && (
+            <div className="success-delete-popup">
+              Task deleted successfully
+            </div>
+          )}
+          {errorMessage && (
+            <div className="error-popup">Task already exists</div>
           )}
         </div>
       </div>
