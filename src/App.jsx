@@ -37,7 +37,10 @@ function App() {
 
   const [showHistoryDrawer, setShowHistoryDrawer] = useState(false);
 
-  const [darkMode, setDarkMode] = useState(false);
+  const [darkMode, setDarkMode] = useState(() => {
+    const isDarkModeOn = localStorage.getItem("darkMode");
+    return isDarkModeOn === "true" ? true : false;
+  });
 
   // Load the data from the local storage
   useEffect(() => {
@@ -65,13 +68,6 @@ function App() {
     if (existingCompletedTimestampList) {
       setCompletedCreatedAtList(existingCompletedTimestampList);
     }
-
-    const isDarkMode = localStorage.getItem("darkMode");
-    if (isDarkMode === "true") {
-      setDarkMode(true);
-    } else {
-      setDarkMode(false);
-    }
   }, []);
 
   // Disable/Enable scrolling when the history drawer is open
@@ -85,7 +81,7 @@ function App() {
 
   // Toggle dark mode
   useEffect(() => {
-    document.body.classList.toggle("dark-mode", darkMode);
+    document.documentElement.classList.toggle("dark-mode", darkMode);
     localStorage.setItem("darkMode", darkMode);
   }, [darkMode]);
 
@@ -320,6 +316,11 @@ function App() {
     setRecentTasksList([]);
     setRecentTimestampsList([]);
 
+    setSuccessDeleteMessage(true);
+    setTimeout(() => {
+      setSuccessDeleteMessage(false);
+    }, 1000);
+
     // Clear the history data from local storage
     localStorage.removeItem("completedTasksHistory");
     localStorage.removeItem("completedTimestampHistory");
@@ -342,6 +343,11 @@ function App() {
   }
 
   function handleTaskDeleteFromHistory(index) {
+    setSuccessDeleteMessage(true);
+    setTimeout(() => {
+      setSuccessDeleteMessage(false);
+    }, 1000);
+
     removeTaskFromHistoryAtIndex(index);
   }
 
@@ -360,6 +366,14 @@ function App() {
 
       // Remove the task from the history list after restoring it
       removeTaskFromHistoryAtIndex(index);
+
+      setSuccessRestoreMessage(true);
+      setTimeout(() => {
+        setSuccessRestoreMessage(false);
+      }, 1000);
+    } else {
+      setErrorMessage(true);
+      setTimeout(() => setErrorMessage(false), 1000);
     }
   }
 
@@ -388,7 +402,7 @@ function App() {
           />
         )}
       </body>
-      <p id="title">To-Do List Application</p>
+      <p id="title">T.O.D.O. – Track, Organize, Do, Optimize</p>
       <HistoryDrawer
         showHistoryDrawer={showHistoryDrawer}
         setShowHistoryDrawer={setShowHistoryDrawer}
@@ -397,6 +411,9 @@ function App() {
         recentTimestampsList={recentTimestampsList}
         handleRestoreTaskFromHistory={handleRestoreTaskFromHistory}
         handleTaskDeleteFromHistory={handleTaskDeleteFromHistory}
+        successDeleteMessage={successDeleteMessage}
+        successRestoreMessage={successRestoreMessage}
+        errorMessage={errorMessage}
       />
       <TaskInput
         task={task}
