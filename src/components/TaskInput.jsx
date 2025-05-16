@@ -36,9 +36,7 @@ function TaskInput({
         {promptMessage && (
           <div className="prompt-popup">Please type something first</div>
         )}
-        {errorMessage && (
-          <div className="error-popup">Task already created or completed</div>
-        )}
+        {errorMessage && <div className="error-popup">Task already exists</div>}
       </div>
     </>
   );
