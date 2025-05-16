@@ -31,7 +31,7 @@ function CompletedTaskList({
       </div>
       <div className="task-list-container">
         {completedTasksList.length === 0 ? (
-          <p id="empty-list">No records 📑</p>
+          <p id="completed-empty-list">No records 📑</p>
         ) : (
           <div className="completed-card-container">
             {completedTasksList.map((_, itemIndex) => (
