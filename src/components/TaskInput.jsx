@@ -21,6 +21,7 @@ function TaskInput({
             onChange={(e) => setTask(e.target.value)}
             id="task-input"
             value={task}
+            autoFocus
             onKeyDown={(e) => {
               if (e.key === "Enter") handleAddTask();
             }}
