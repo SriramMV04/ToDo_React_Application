@@ -1,12 +1,13 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faTrash } from "@fortawesome/free-solid-svg-icons";
+import { faPenToSquare, faTrash } from "@fortawesome/free-solid-svg-icons";
 import { faThumbsUp } from "@fortawesome/free-solid-svg-icons";
 
 function TaskList({
   taskList,
   handleClearTasks,
   handleTaskDelete,
-  handleCompletedTask,
+  handleTaskCompleted,
+  handleEditTask,
   createdAtList,
   successDeleteMessage,
   markedAsCompletedMessage,
@@ -48,8 +49,14 @@ function TaskList({
 
                 <div className="action-buttons">
                   <button
+                    className="action-button edit-button"
+                    onClick={() => handleEditTask(itemIndex)}
+                  >
+                    <FontAwesomeIcon icon={faPenToSquare} title="Edit" />
+                  </button>
+                  <button
                     className="action-button complete-button"
-                    onClick={() => handleCompletedTask(itemIndex)}
+                    onClick={() => handleTaskCompleted(itemIndex)}
                   >
                     <FontAwesomeIcon icon={faThumbsUp} title="Completed" />
                   </button>
