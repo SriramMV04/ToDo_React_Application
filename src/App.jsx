@@ -4,7 +4,7 @@ import Footer from "./components/Footer";
 import TaskInput from "./components/TaskInput";
 import TaskList from "./components/TaskList";
 
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faClockRotateLeft } from "@fortawesome/free-solid-svg-icons";
@@ -12,6 +12,7 @@ import { faCloudMoon } from "@fortawesome/free-solid-svg-icons";
 import { faCloudSun } from "@fortawesome/free-solid-svg-icons";
 
 import HistoryDrawer from "./components/HistoryDrawer";
+import EditTaskForm from "./components/EditTaskForm";
 
 function App() {
   const [task, setTask] = useState("");
@@ -35,12 +36,19 @@ function App() {
   const [recentTasksList, setRecentTasksList] = useState([]);
   const [recentTimestampsList, setRecentTimestampsList] = useState([]);
 
+  const [editTaskText, setEditTaskText] = useState("");
+  const [editTaskIndex, setEditTaskIndex] = useState(null);
+  const [showEditTaskForm, setShowEditTaskForm] = useState(false);
+
   const [showHistoryDrawer, setShowHistoryDrawer] = useState(false);
 
   const [darkMode, setDarkMode] = useState(() => {
     const isDarkModeOn = localStorage.getItem("darkMode");
     return isDarkModeOn === "true" ? true : false;
   });
+
+  // State to autoFocus the input field
+  const inputRef = useRef(null);
 
   // Load the data from the local storage
   useEffect(() => {
@@ -84,6 +92,17 @@ function App() {
     document.documentElement.classList.toggle("dark-mode", darkMode);
     localStorage.setItem("darkMode", darkMode);
   }, [darkMode]);
+
+  // AutoFocus the edit task input field
+  useEffect(() => {
+    if (showEditTaskForm) {
+      const timer = setTimeout(() => {
+        if (inputRef.current) inputRef.current.focus();
+      }, 100);
+
+      return () => clearTimeout(timer);
+    }
+  }, [showEditTaskForm]);
 
   function handleAddTask() {
     if (task.trim() === "") {
@@ -170,7 +189,7 @@ function App() {
     }, 1000);
   }
 
-  function handleCompletedTask(index) {
+  function handleTaskCompleted(index) {
     const task = taskList[index];
     const timestamp = Date.now();
     const date = new Date(timestamp);
@@ -207,6 +226,63 @@ function App() {
         setMarkedAsCompletedMessage(false);
       }, 1000);
     }
+  }
+
+  function handleEditTask(index) {
+    // Open the edit task form
+    setShowEditTaskForm(true);
+
+    const task = taskList[index];
+    setEditTaskText(task);
+    setEditTaskIndex(index);
+  }
+
+  function handleSaveEditTask(index) {
+    const updatedTask = editTaskText;
+
+    if (!updatedTask.trim()) return;
+
+    if (
+      taskList.includes(updatedTask) ||
+      completedTasksList.includes(updatedTask)
+    ) {
+      setErrorMessage(true);
+      setTimeout(() => setErrorMessage(false), 1000);
+      return;
+    }
+
+    const updatedTaskList = [...taskList];
+    updatedTaskList[index] = updatedTask;
+
+    const timestamp = Date.now();
+    const date = new Date(timestamp);
+    const formattedTimestamp = date.toLocaleString("en-US", {
+      weekday: "short",
+      year: "numeric",
+      month: "short",
+      day: "2-digit",
+      hour: "numeric",
+      minute: "2-digit",
+      hour12: true,
+    });
+
+    const updatedCreatedAtList = [...createdAtList];
+    const updatedTimestamp = formattedTimestamp + " (edited)";
+    updatedCreatedAtList[index] = updatedTimestamp;
+
+    setTaskList(updatedTaskList);
+    setCreatedAtList(updatedCreatedAtList);
+
+    localStorage.setItem("tasks", JSON.stringify(updatedTaskList));
+    localStorage.setItem("timestamp", JSON.stringify(updatedCreatedAtList));
+
+    setSuccessMessage(true);
+    setTimeout(() => setSuccessMessage(false), 1000);
+
+    // Clear the input field after saving the edit
+    setEditTaskText("");
+    setEditTaskIndex(null);
+    setShowEditTaskForm(false);
   }
 
   function removeCompletedTaskAtIndex(index) {
@@ -401,6 +477,18 @@ function App() {
             title="Light mode"
           />
         )}
+        <EditTaskForm
+          showEditTaskForm={showEditTaskForm}
+          editTaskText={editTaskText}
+          editTaskIndex={editTaskIndex}
+          setEditTaskText={setEditTaskText}
+          handleSaveEditTask={handleSaveEditTask}
+          setShowEditTaskForm={setShowEditTaskForm}
+          promptMessage={promptMessage}
+          errorMessage={errorMessage}
+          successMessage={successMessage}
+          inputRef={inputRef}
+        />
       </body>
       <p id="title">T.O.D.O. – Track, Organize, Do, Optimize</p>
       <HistoryDrawer
@@ -427,7 +515,8 @@ function App() {
         taskList={taskList}
         handleClearTasks={handleClearTasks}
         handleTaskDelete={handleTaskDelete}
-        handleCompletedTask={handleCompletedTask}
+        handleTaskCompleted={handleTaskCompleted}
+        handleEditTask={handleEditTask}
         createdAtList={createdAtList}
         successDeleteMessage={successDeleteMessage}
         markedAsCompletedMessage={markedAsCompletedMessage}
