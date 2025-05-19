@@ -604,6 +604,29 @@ li {
   text-align: center;
 }
 
+.history-list-container .card-container {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  gap: 15px;
+}
+
+.history-list-container {
+  margin-bottom: 5%;
+}
+
+.history-list-container .completed-card-container {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  gap: 15px;
+  padding-bottom: 35px;
+}
+
+.history-list-container {
+  margin: 0 5%;
+}
+
 /* Edit Task CSS */
 .edit-form-backdrop {
   position: fixed;
@@ -658,7 +681,6 @@ li {
   font-size: 1em;
   outline: none;
   box-shadow: 0 5px 30px rgba(0, 0, 0, 0.1);
-  /* margin-bottom: 1.3em; */
 }
 
 .edit-task-instructions {
@@ -719,4 +741,107 @@ li {
 .footer span {
   font-size: 25px;
   color: red;
+}
+
+/* Media Queries */
+@media (max-width: 600px) {
+  body {
+    margin-left: 0%;
+    margin-right: 0%;
+    font-size: 15px;
+  }
+
+  .top-bar {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    position: relative;
+    z-index: 10;
+    top: 10px;
+  }
+  .history-icon {
+    position: static;
+    margin-left: 0;
+    margin-right: auto;
+    font-size: 25px;
+    display: inline-block;
+  }
+  .dark-theme-icon,
+  .light-theme-icon {
+    position: static;
+    margin-left: auto;
+    margin-right: 0;
+    font-size: 26px;
+    display: inline-block;
+  }
+
+  #title {
+    font-size: 2.4em;
+    margin-left: 2%;
+    margin-right: 2%;
+    margin-top: 10%;
+  }
+
+  #title::after {
+    width: 150px;
+  }
+
+  .input-wrapper {
+    width: 90%;
+  }
+
+  .clear-container {
+    padding-right: 20px;
+  }
+
+  .task-conatainer {
+    margin-top: 20px;
+  }
+
+  .task-list-container {
+    margin: 0 5%;
+  }
+
+  .history-list-container {
+    margin: 0;
+  }
+
+  .card-wrapper,
+  .main-card,
+  .completed-card {
+    border-radius: 15px;
+  }
+
+  .task-list-container .completed-card-container {
+    padding-bottom: 60px;
+  }
+
+  .action-button,
+  .completed-action-button {
+    width: 50px;
+    font-size: 18px;
+  }
+
+  .side-drawer {
+    width: 70vw;
+    left: -100vw;
+  }
+  .side-drawer.open {
+    left: 0;
+  }
+
+  .drawer-header {
+    margin-top: 25px;
+  }
+
+  .edit-task-form {
+    width: 70vw;
+    max-width: 98vw;
+    padding: 15px 15px;
+  }
+
+  .footer span {
+    font-size: 16px;
+  }
 }
