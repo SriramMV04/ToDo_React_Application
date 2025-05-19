@@ -42,7 +42,7 @@ function HistoryDrawer({
 
         <h2 className="heading">Recently Completed Tasks</h2>
 
-        <div className="task-list-container">
+        <div className="history-list-container">
           {recentTasksList.length === 0 ? (
             <p id="empty-list">No records 📑</p>
           ) : (
