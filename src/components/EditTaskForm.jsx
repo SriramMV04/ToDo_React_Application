@@ -30,16 +30,16 @@ function EditTaskForm({
         </div>
         <div className="edit-task-buttons">
           <button
-            className="save-edit-btn"
-            onClick={() => handleSaveEditTask(editTaskIndex)}
-          >
-            Save
-          </button>
-          <button
             className="cancel-edit-btn"
             onClick={() => setShowEditTaskForm(false)}
           >
             Cancel
+          </button>
+          <button
+            className="save-edit-btn"
+            onClick={() => handleSaveEditTask(editTaskIndex)}
+          >
+            Save
           </button>
         </div>
       </div>
