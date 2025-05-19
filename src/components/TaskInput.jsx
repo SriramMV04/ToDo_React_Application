@@ -17,7 +17,7 @@ function TaskInput({
         <div className="input-wrapper">
           <input
             type="text"
-            placeholder="Write your tasks here and then press enter"
+            placeholder="Hey!! anything you wanna do today?"
             onChange={(e) => setTask(e.target.value)}
             id="task-input"
             value={task}
