@@ -456,27 +456,30 @@ function App() {
   return (
     <>
       <body>
-        <FontAwesomeIcon
-          icon={faClockRotateLeft}
-          className="history-icon"
-          onClick={handleViewHistory}
-          title="History"
-        />
-        {!darkMode ? (
+        <div className="top-bar">
           <FontAwesomeIcon
-            icon={faCloudMoon}
-            className="dark-theme-icon"
-            onClick={() => setDarkMode(!darkMode)}
-            title="Dark mode"
+            icon={faClockRotateLeft}
+            className="history-icon"
+            onClick={handleViewHistory}
+            title="History"
           />
-        ) : (
-          <FontAwesomeIcon
-            icon={faCloudSun}
-            className="light-theme-icon"
-            onClick={() => setDarkMode(!darkMode)}
-            title="Light mode"
-          />
-        )}
+          {!darkMode ? (
+            <FontAwesomeIcon
+              icon={faCloudMoon}
+              className="dark-theme-icon"
+              onClick={() => setDarkMode(!darkMode)}
+              title="Dark mode"
+            />
+          ) : (
+            <FontAwesomeIcon
+              icon={faCloudSun}
+              className="light-theme-icon"
+              onClick={() => setDarkMode(!darkMode)}
+              title="Light mode"
+            />
+          )}
+        </div>
+
         <EditTaskForm
           showEditTaskForm={showEditTaskForm}
           editTaskText={editTaskText}
