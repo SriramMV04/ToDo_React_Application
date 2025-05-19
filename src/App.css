@@ -777,7 +777,7 @@ li {
   }
 
   #title {
-    font-size: 2.4em;
+    font-size: 2em;
     margin-left: 2%;
     margin-right: 2%;
     margin-top: 10%;
@@ -789,6 +789,14 @@ li {
 
   .input-wrapper {
     width: 90%;
+  }
+
+  .input-wrapper input {
+    font-size: 14px;
+  }
+
+  .input-icon:hover {
+    color: inherit !important;
   }
 
   .clear-container {
@@ -821,6 +829,26 @@ li {
   .completed-action-button {
     width: 50px;
     font-size: 18px;
+  }
+
+  .success-popup,
+  .error-popup,
+  .prompt-popup,
+  .note-popup,
+  .completed-popup,
+  .success-restore-popup,
+  .success-delete-popup,
+  .success-finish-popup {
+    font-size: 10px;
+  }
+
+  .history-icon:hover,
+  .dark-theme-icon:hover,
+  .light-theme-icon:hover,
+  .clear-btn:hover,
+  .close-btn:hover {
+    color: inherit !important;
+    cursor: default !important;
   }
 
   .side-drawer {
