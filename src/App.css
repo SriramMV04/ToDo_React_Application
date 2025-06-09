@@ -35,7 +35,7 @@
 body {
   margin-left: 10%;
   margin-right: 10%;
-  font-family: Courier;
+  font-family: Helvetica;
   color: inherit;
   background-color: transparent;
 }
@@ -89,7 +89,6 @@ body {
   margin-right: 12%;
   font-weight: 800;
   font-size: 3em;
-  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
   color: #2c3e50;
   letter-spacing: 1.5px;
   text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.1);
